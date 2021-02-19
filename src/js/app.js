@@ -24,4 +24,5 @@ function loadLax() {
 
 window.onload = () => {
   loadLax();
+  document.querySelector('#preloader').remove();
 };

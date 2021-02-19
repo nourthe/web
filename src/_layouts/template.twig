@@ -6,6 +6,7 @@
     <title>nourthe Web</title>
   </head>
   <body>
+    <div id="preloader"></div>
 
   {% set title %}{{ block("title") }}{% endset %}
   {% set menu = _context.pages %}
@@ -22,7 +23,10 @@
         {% include "@components/menu.twig" with {'mobile': false} %}
       </div>
 
-      <a href="{{ _context.links.github }}" class="get-started-btn scrollto">Github</a>
+      <a href="{{ _context.links.github }}" class="get-started-btn scrollto">
+       <i class="bx bxl-github"></i>
+        Github
+      </a>
 
     </div>
   </header><!-- End Header -->
@@ -38,7 +42,7 @@
           {% endblock %}
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="https://res.cloudinary.com/ourthe/image/upload/v1610225617/nourthe/laptop.png" class="img-fluid animated" alt="">
+          <img src="https://res.cloudinary.com/ourthe/image/upload/v1613748589/nourthe/laptop.png" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
