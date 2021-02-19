@@ -5,13 +5,19 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const htmlPages = [
   {
-    menu: 'home',
+    menu: 'Home',
     template: './src/index.twig',
   },
   {
-    menu: 'about',
+    menu: 'About',
     filename: 'about/index.html',
     template: './src/about.twig',
+    chunks: ['main'],
+  },
+  {
+    menu: 'Portfolio',
+    filename: 'portfolio/index.html',
+    template: './src/portfolio.twig',
     chunks: ['main'],
   },
   {
@@ -38,13 +44,25 @@ const templateLoader = {
     {
       loader: 'twig-html-loader',
       options: {
+        namespaces: {
+          layouts: './src/_layouts',
+          components: './src/_components',
+        },
         data: () => {
           const htmlStandPages = [];
           htmlPages.forEach((item) => {
             htmlStandPages.push(standarizedPage(item));
           });
           return {
+            links: {
+              github: 'https://github.com/nourthe',
+              linkedin: 'https://linkedin.com/in/nourthe',
+              twitter: 'https://twitter.com/ngourthe',
+            },
             pages: htmlStandPages,
+            date: {
+              year: 2021,
+            },
           };
         },
       },
@@ -80,7 +98,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     host: '0.0.0.0',
-    port: 9000,
+    port: 9090,
     historyApiFallback: {
       index: '404.html',
       rewrites: [
@@ -106,6 +124,13 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      },
+      {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: [
@@ -113,6 +138,17 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(svg|eot|woff|ttf|otf|svg|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
             },
           },
         ],
