@@ -19,6 +19,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "file-loader": "^6.2.0",
+    "ftp-deploy": "^2.4.1",
     "html-webpack-plugin": "^4.5.0",
     "node-sass": "^5.0.0",
     "raw-loader": "^4.0.2",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -p",
+    "build": "webpack --mode production",
     "dev": "webpack --mode development",
     "start": "webpack serve --mode development"
   },
