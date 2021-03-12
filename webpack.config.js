@@ -78,7 +78,7 @@ const getHtmlPluginPages = () => {
       new HtmlWebpackPlugin({
         filename: page.filename,
         template: page.template,
-        chunks: page.chunks,
+        defer: page.chunks,
       }),
     );
   });

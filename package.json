@@ -34,7 +34,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "predeploy": "npm run build",
+    "deploy": "node deploy"
   },
   "repository": {
     "type": "git",

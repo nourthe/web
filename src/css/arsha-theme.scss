@@ -14,7 +14,7 @@ $base-gradient: linear-gradient(150deg, $base-color 0%, $base-color-dark 59%, $b
 --------------------------------------------------------------*/
 @import "~boxicons/css/boxicons.min.css";
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i";
-
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600;700;800&display=swap");
 /* nahuel */
 .btn-bx{
     top: 4px;
@@ -40,7 +40,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Jost", sans-serif;
+  font-family: "Raleway", "Jost", sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -53,11 +53,6 @@ h1, h2, h3, h4, h5, h6 {
 # Preloader
 --------------------------------------------------------------*/
 #preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   z-index: 9999;
   overflow: hidden;
   background: $base-color;
