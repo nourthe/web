@@ -1,8 +1,8 @@
-{% extends "_layouts/template.twig" %}
+{% extends "../_layouts/page.twig" %}
 {% block title "Portfolio" %}
 
 {% block header_content %}
-          <h1>Portfolio</h1>
+          <h1>Web Portfolio</h1>
           <h2>My web projects.</h2>
           <div class="d-lg-flexx d-none ">
             <a href="#about" class="btn-get-started scrollto">LinkedIn</a>
@@ -11,6 +11,19 @@
 {% endblock %}
 
 {% block content %}
-  <a href="/">VOLVER</a>
-  <div>probando Portfolio!</div>
+
+  <section>
+    <div class="container">
+      <h3>All proyects:</h3>
+      <div class="col-lg-3 col-md-6 footer-links">
+        <ul>
+          {% for entry in tp.portfolioEntries %}
+            <li><a href="/{{entry.permalink}}">{{entry.project}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
 {% endblock %}

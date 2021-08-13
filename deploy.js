@@ -3,14 +3,16 @@ const FtpDeploy = require('ftp-deploy');
 const ftpDeploy = new FtpDeploy();
 
 const config = {
-  user: 'nahuel@ourthe.com.ar',
+  // user: '@ourthe.com.ar',
+  // pass: '',
   host: 'ftp.ourthe.com.ar',
   port: 21,
-  localRoot: __dirname + '/dist',
+  localRoot: `${__dirname}/dist`,
   remoteRoot: '/',
-  include: ["*", "**/*"],      // this would upload everything except dot files
+  include: ['*', '**/*'], // this would upload everything except dot files
   // e.g. exclude sourcemaps, and ALL files in node_modules (including dot files)
-  exclude: ['dist/**/*.map', 'node_modules/**', 'node_modules/**/.*', '.git/**'],
+  exclude: ['.git/**'],
+  exclude: ['node_modules/**', '.git/**'],
   // delete ALL existing files at destination before uploading, if true
   deleteRemote: false,
   // Passive mode is forced (EPSV command is not sent)

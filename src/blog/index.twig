@@ -1,0 +1,31 @@
+{% extends "../_layouts/page.twig" %}
+
+{% block title "nourthe's Blog" %}
+
+{% block header_content %}
+    <a href="/blog"><h4>Return to home</h4></a>
+    <h1>Blog</h1>
+    <h2>Read my casual entries.</h2>
+    <div class="d-lg-flexx d-none ">
+      <a href="#about" class="btn-get-started scrollto">LinkedIn</a>
+      <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true">Github<i class="icofont-play-alt-2"></i></a>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+  <section>
+    <div class="container">
+      <h3>All entries:</h3>
+      <div class="col-lg-3 col-md-6 footer-links">
+        <ul>
+          {% for entry in tp.blogEntries %}
+            <li><a href="/{{entry.permalink}}">{{entry.title}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+{% endblock %}

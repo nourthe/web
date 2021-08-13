@@ -1,7 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 // production
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const enBlogFolder = './content/en/blog/';
+const esBlogFolder = './content/es/blog/';
+const enPortfolioFolder = './content/en/portfolio/';
+const esPortfolioFolder = './content/es/portfolio/';
+const fs = require('fs');
+const fm = require('front-matter');
+const marked = require('marked');
 
 const htmlPages = [
   {
@@ -15,9 +26,15 @@ const htmlPages = [
     chunks: ['main'],
   },
   {
+    menu: 'Blog',
+    filename: 'blog/index.html',
+    template: './src/blog/index.twig',
+    chunks: ['main'],
+  },
+  {
     menu: 'Portfolio',
     filename: 'portfolio/index.html',
-    template: './src/portfolio.twig',
+    template: './src/portfolio/index.twig',
     chunks: ['main'],
   },
   {
@@ -27,9 +44,79 @@ const htmlPages = [
   },
 ];
 
+const commonParameters = {
+  links: {
+    github: 'https://github.com/nourthe',
+    linkedin: 'https://linkedin.com/in/nourthe',
+    twitter: 'https://twitter.com/ngourthe',
+  },
+};
+
+const getBlogEntries = () => {
+  const blogEntries = [];
+  fs.readdirSync(esBlogFolder).forEach((year) => {
+    const yearFolderFull = path.join(esBlogFolder, year);
+    if (fs.statSync(yearFolderFull).isDirectory()) {
+      fs.readdirSync(yearFolderFull).forEach((file) => {
+        const fileFullPath = path.join(yearFolderFull, file);
+        const data = fs.readFileSync(fileFullPath, 'utf-8');
+        const content = fm(data); // Front-matter extract.
+        const ext = path.extname(file);
+        const filename = path.join('blog', year, path.basename(file, ext));
+        if (ext === '.md') {
+          content.body = marked(content.body); // Markdown proccess.
+        } else {
+          console.error('nourthe web: formato desconocido: ', ext);
+        }
+        blogEntries.push({
+          filename,
+          year,
+          path: fileFullPath,
+          permalink: filename,
+          title: content.attributes.title,
+          ...content,
+        });
+      });
+    }
+  });
+  return blogEntries;
+};
+
+const getPortfolioEntries = () => {
+  const portfolioEntries = [];
+  fs.readdirSync(esPortfolioFolder).forEach((year) => {
+    const yearFolderFull = path.join(esPortfolioFolder, year);
+    if (fs.statSync(yearFolderFull).isDirectory()) {
+      fs.readdirSync(yearFolderFull).forEach((file) => {
+        const fileFullPath = path.join(yearFolderFull, file);
+        const data = fs.readFileSync(fileFullPath, 'utf-8');
+        const content = fm(data); // Front-matter extract.
+        const ext = path.extname(file);
+        const filename = path.join('portfolio', year, path.basename(file, ext));
+        if (ext === '.md') {
+          content.body = marked(content.body); // Markdown proccess.
+        } else {
+          console.error('nourthe web: formato desconocido: ', ext);
+        }
+        portfolioEntries.push({
+          filename,
+          year,
+          path: fileFullPath,
+          permalink: filename,
+          project: content.attributes.project,
+          link: content.attributes.link,
+          ...content,
+        });
+      });
+    }
+  });
+  return portfolioEntries;
+};
+
 function standarizedPage(originalPage) {
   const page = originalPage;
   if (page.filename === undefined) page.filename = 'index.html';
+  if (page.slug === undefined) page.slug = page.filename;
   if (page.chunks === undefined) page.chunks = 'all';
   if (page.filename === 'index.html') page.path = '/';
   if (page.menu === undefined) page.menu = '';
@@ -37,41 +124,18 @@ function standarizedPage(originalPage) {
   return page;
 }
 
-const templateLoader = {
-  test: /\.twig$/,
-  use: [
-    'raw-loader',
-    {
-      loader: 'twig-html-loader',
-      options: {
-        namespaces: {
-          layouts: './src/_layouts',
-          components: './src/_components',
-        },
-        data: () => {
-          const htmlStandPages = [];
-          htmlPages.forEach((item) => {
-            htmlStandPages.push(standarizedPage(item));
-          });
-          return {
-            links: {
-              github: 'https://github.com/nourthe',
-              linkedin: 'https://linkedin.com/in/nourthe',
-              twitter: 'https://twitter.com/ngourthe',
-            },
-            pages: htmlStandPages,
-            date: {
-              year: 2021,
-            },
-          };
-        },
-      },
-    },
-  ],
-};
-
 const getHtmlPluginPages = () => {
   const htmlPluginPages = [];
+  const blogEntries = getBlogEntries();
+  const portfolioEntries = getPortfolioEntries();
+  const blogChunks = ['main'];
+  const portfolioChunks = ['main'];
+  const htmlStandPages = [];
+  const stringsPath = path.join(__dirname, './content/es/strings.json');
+  const strings = JSON.parse(fs.readFileSync(stringsPath));
+  htmlPages.forEach((noStPage) => {
+    htmlStandPages.push(standarizedPage(noStPage));
+  });
   htmlPages.forEach((item) => {
     const page = standarizedPage(item);
     htmlPluginPages.push(
@@ -79,6 +143,54 @@ const getHtmlPluginPages = () => {
         filename: page.filename,
         template: page.template,
         defer: page.chunks,
+        templateParameters: {
+          ...commonParameters,
+          pages: htmlStandPages,
+          blogEntries,
+          portfolioEntries,
+          date: {
+            year: 2021,
+          },
+        },
+        strings,
+      }),
+    );
+  });
+  blogEntries.forEach((entry) => {
+    htmlPluginPages.push(
+      new HtmlWebpackPlugin({
+        filename: path.join(entry.filename, 'index.html'),
+        template: './src/blog/entry.twig',
+        defer: blogChunks,
+        templateParameters: {
+          ...entry,
+          ...commonParameters,
+          pages: htmlStandPages,
+          blogEntries,
+          date: {
+            year: 2021,
+          },
+        },
+        strings,
+      }),
+    );
+  });
+  portfolioEntries.forEach((entry) => {
+    htmlPluginPages.push(
+      new HtmlWebpackPlugin({
+        filename: path.join(entry.filename, 'index.html'),
+        template: './src/portfolio/entry.twig',
+        defer: portfolioChunks,
+        templateParameters: {
+          ...entry,
+          ...commonParameters,
+          pages: htmlStandPages,
+          portfolioEntries,
+          date: {
+            year: 2021,
+          },
+        },
+        strings,
       }),
     );
   });
@@ -91,7 +203,7 @@ module.exports = {
     vendor: './src/js/vendor',
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: path.join('assets', 'js', '[name].bundle.js'),
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
@@ -109,16 +221,23 @@ module.exports = {
 
   plugins: [
     ...getHtmlPluginPages(),
+    new PreloadWebpackPlugin(),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: path.join('assets', 'css', 'bundle.css'),
+    }),
   ],
 
   module: {
     rules: [
-      templateLoader,
+      {
+        test: /\.twig$/,
+        loader: 'twig-loader',
+      },
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
@@ -126,7 +245,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
         ],
       },
@@ -153,10 +272,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /\.scss/,
-      //   use: '',
-      // },
     ],
   },
 
