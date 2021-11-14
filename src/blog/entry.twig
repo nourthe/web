@@ -6,6 +6,7 @@
     <a href="/blog"><h4>Return to blog menu</h4></a>
     <h1>{{title}}</h1>
     <h2>{{description}}</h2>
+    <h2>{{attributes.date.toLocaleDateString(lang)}}</h2>
   {% endblock %}
 
 {% block content %}
@@ -22,6 +23,13 @@
   </div>
 </section>
 
-<script type="text/javascript" src="/app/hashover/comments.php"></script>
+<script type="text/javascript" src="/app/hashover/loader.php"></script>
+<script type="text/javascript">
+    var hashover = new HashOver ('hashover', {
+        settings: {
+            language: 'es_ES'
+        }
+    });
+</script>
 
 {% endblock %}

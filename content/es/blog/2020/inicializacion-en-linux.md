@@ -1,10 +1,13 @@
 ---
 title: Instalé Linux... ¿Y ahora qué?
+date: 2020-12-15
 ---
 ## Instalé Linux... ¿Y ahora qué?
 
 > Nota: en esta entrada asumo que instalaste Ubuntu. ¿Porque es mi favorito?
 > absolutamente no. Porque es 95% probable que sea el que te instalaste.
+
+### Adaptación
 
 Te voy a ser bien sincero: vas a tener problemas.
 
@@ -16,7 +19,9 @@ Porque al final se hace un poco divertido buscar como hacer ciertas cosas para t
 
 Bueno así que en lo primero que te voy a ser sincero, es que vas a necesitar mucho usar la terminal.
 
-Una desventaja que tienen los entornos de escritorio de Linux es que todavia no se puede hacer todo con clicks como en windows... Estan bastante maduros (al menos los principales que pueden ser GNOME (la que trae por defecto Ubuntu), KDE PLASMA, XFCE), pero vas a recurrir a la terminal en algún momento **seguro**.
+### La terminal
+
+Una desventaja que tienen los entornos de escritorio de Linux es que todavia no se puede hacer todo con clicks como en windows... Están bastante maduros (al menos los principales que pueden ser `GNOME` (la que trae por defecto Ubuntu), `KDE` `PLASMA`, `XFCE`), pero vas a recurrir a la terminal en algún momento **seguro**.
 
 Por ejemplo, tenés siempre a tu disposicion un instalador de paquetes (no me preguntes el nombre, se debe llamar _tienda de ubuntu_ o algo asi) donde podés instalar casi cualquier software que necesites; pero yo si te voy a recomendar instalar algo, te voy a pasar el comando para que metas en la terminal directamente, porque rapido vas a tener instalando varios paquetes.
 
@@ -51,6 +56,8 @@ La prompt es lo que se muestra en la terminal todo el tiempo cada vez que apret�
 También cuando escribís comandos, apreta siempre el `TAB` para autocompletarlos... Si estas escribiendo por ejemplo el comando ```firefox``` , escribís ```fir``` y apretas el `TAB`, si hay mas de una opción tenes que apretarlo varias veces para que te lo autocomplete.
 
 Pero basta de terminales, si queres más sobre la terminal despues voy a tirar más tips.
+
+### Aplicaciones
 
 Si sos Chrome-dependiente como yo, capaz en la tienda te preocupe que no esté Google Chrome, pasa en varios sistemas linux... Si no está el que si está seguro es Chromium. Podes instalarlo tranquilo es igual a chrome, y es de google, ¡Sin miedo!.
 
@@ -88,7 +95,7 @@ Pues olvidate. Al menos yo nunca pude (no me esforcé **mucho** tampoco), except
 
 Pero esto nos da el pie a la última sección que te voy a dar en esta guía rápida...
 
-## Alternativas que yo uso.
+### Alternativas de grandes softwares
 
 Existen alternativas funcionales en linux al 80% del software privativo.
 
@@ -96,7 +103,7 @@ Hasta existen alternativas, no solo gratuitas, si no tambien **Open Source**.
 
 A veces son muy parecidas a las originales, a veces difieren bastante, pero lo importante es que pueden obtener, de la misma o distinta forma, los mismos resultados a nivel amateur; solo si estás de acuerdo en aprender cosas desde 0.
 
-### Microsoft Office.
+#### Microsoft Office.
 
 Hace años no los uso, lo poco que lo necesité fue más que suficiente Google Docs, Google Sheets, con las ventajas de tener todo online. También ahora se puede usar de forma gratuita Microst Word y Excel online tal como los productos de Google.
 
@@ -106,7 +113,7 @@ Pero tambien tenemos algunas alternativas de código abierto: `Libre Office` y `
 
 No son tan buenas como las versiones de Microsoft y Google pero pueden estar ahí para salvarte las pápas. En algunas distribuciones Linux vienen instaladas o te ofrecen instalarlas en el proceso de instalación, y como casi todo el software open source, son muy livianas.
 
-### Adobe Photoshop.
+#### Adobe Photoshop.
 
 Lo usaba para cosas simples, pero aprendiendo a usar bien GIMP ahora ni en Windows lo volví a usar.
 
@@ -118,7 +125,7 @@ En el caso de que uses Photoshop para dibujar gimp puede servir, pero recomendar
 
 ```sudo apt install krita```
 
-### Adobe Illustrator / Corel Draw.
+#### Adobe Illustrator / Corel Draw.
 
 Exactamente igual que el caso de Photoshop, aprender a usar esto es más que suficiente para hacer cosas básicas. Pero en este caso estoy más enamorado de la herramienta libre.
 
@@ -126,7 +133,7 @@ Se trata de `Inkscape`, bastante poderosa, y al igual que gimp, es una herramien
 
 ```sudo apt install inkscape```
 
-### Programas de edición de video.
+#### Programas de edición de video.
 
 El año pasado (2019) conocí tambien un editor de video libre muy decente.
 
@@ -150,4 +157,4 @@ Y si tenés unos MBs libres podés instalar todos los multimedia ahora para ir p
 
 Y bueno estoy a tu disposicion para cualquier duda que tengas a lo largo de tu viaje por linux...
 
-Solo dejá un comentario, unite al discord o visitá el inicio de mi página para cualquier forma de contacto.
+Solo dejá un comentario, unite al discord o visitá el inicio de mi página para encontrar más formas de contacto.

@@ -50,6 +50,9 @@ const commonParameters = {
     linkedin: 'https://linkedin.com/in/nourthe',
     twitter: 'https://twitter.com/ngourthe',
   },
+  date: {
+    year: 2021,
+  },
 };
 
 const getBlogEntries = () => {
@@ -74,6 +77,7 @@ const getBlogEntries = () => {
           path: fileFullPath,
           permalink: filename,
           title: content.attributes.title,
+          date: content.attributes.date,
           ...content,
         });
       });
@@ -104,6 +108,7 @@ const getPortfolioEntries = () => {
           path: fileFullPath,
           permalink: filename,
           project: content.attributes.project,
+          date: content.attributes.date,
           link: content.attributes.link,
           ...content,
         });
@@ -148,9 +153,7 @@ const getHtmlPluginPages = () => {
           pages: htmlStandPages,
           blogEntries,
           portfolioEntries,
-          date: {
-            year: 2021,
-          },
+          lang: 'es',
         },
         strings,
       }),
@@ -167,9 +170,8 @@ const getHtmlPluginPages = () => {
           ...commonParameters,
           pages: htmlStandPages,
           blogEntries,
-          date: {
-            year: 2021,
-          },
+          portfolioEntries,
+          lang: 'es',
         },
         strings,
       }),
@@ -186,9 +188,7 @@ const getHtmlPluginPages = () => {
           ...commonParameters,
           pages: htmlStandPages,
           portfolioEntries,
-          date: {
-            year: 2021,
-          },
+          lang: 'es',
         },
         strings,
       }),
