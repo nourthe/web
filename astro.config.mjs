@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://<your-github-username>.github.io/<your-repo-name>/',
-  base: '/<your-repo-name>/',
+  site: 'https://nourthe.github.io/web/',
+  base: '/web/',
   output: 'static',
   integrations: [],
 });

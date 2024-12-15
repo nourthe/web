@@ -20,14 +20,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./astro-site
+        working-directory: ./
 
       - name: Build Astro site
         run: npm run build
-        working-directory: ./astro-site
+        working-directory: ./
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./astro-site/dist
+          publish_dir: ./dist
