@@ -16,6 +16,9 @@ module.exports = {
       boxShadow: {
         'md3': '0 4px 6px rgba(0, 0, 0, 0.1)',
       },
+      maxWidth: {
+        'content': '800px',
+      },
     },
   },
   plugins: [],
